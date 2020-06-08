@@ -4,6 +4,7 @@
     -> image
  = delte
  = retweet
+ = liking
 
 2. Users
  = register
