@@ -9,9 +9,12 @@ const appEl = document.getElementById('root');
 if(appEl) {
   ReactDOM.render(<App/>, appEl);
 }
+
+const x = React.createElement
+
 const tweetsEl = document.getElementById("tweetme")
 if(tweetsEl) {
-  ReactDOM.render(<TweetsComponent/>, tweetsEl)
+  ReactDOM.render(x(TweetsComponent, tweetsEl.dataset), tweetsEl)
 }
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
