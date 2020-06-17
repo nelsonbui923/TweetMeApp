@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.conf import settings
 from .models import Tweet
+from profiles.serializers import PublicProfileSeriualizer
 
 MAX_TWEET_LENGTH = settings.MAX_TWEET_LENGTH
 TWEET_ACTION_OPTIONS = settings.TWEET_ACTION_OPTIONS
@@ -18,11 +19,12 @@ class TweetActionSerializer(serializers.Serializer):
         return value
 
 class TweetCreateSerializer(serializers.ModelSerializer):
+    user = PublicProfileSeriualizer(source='user.profile', read_only=True)
     likes = serializers.SerializerMethodField(read_only=True)
 
     class Meta: 
         model = Tweet
-        fields = ['id', 'content', 'likes']
+        fields = ['user', 'id', 'content', 'likes', 'timestamp']
 
     def get_likes(self, obj):
         return obj.likes.count()
@@ -33,11 +35,12 @@ class TweetCreateSerializer(serializers.ModelSerializer):
         return value
 
 class TweetSerializer(serializers.ModelSerializer):
+    user = PublicProfileSeriualizer(source='user.profile', read_only=True)
     likes = serializers.SerializerMethodField(read_only=True)
     parent = TweetCreateSerializer(read_only=True)
     class Meta: 
         model = Tweet
-        fields = ['id', 'content', 'likes', 'is_retweet', 'parent']
+        fields = ['timestamp', 'user', 'id', 'content', 'likes', 'is_retweet', 'parent']
 
     def get_likes(self, obj):
         return obj.likes.count()
