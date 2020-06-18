@@ -44,6 +44,6 @@ urlpatterns = [
     re_path(r'api/profiles?/', include('profiles.api.urls')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, 
-                document_root=settings.STATIC_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, 
+#                 document_root=settings.STATIC_ROOT)
