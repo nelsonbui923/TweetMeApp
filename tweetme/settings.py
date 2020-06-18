@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'tweetme.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
+DATABASE_URL = 'sqlite://root/db.sqlite3'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
